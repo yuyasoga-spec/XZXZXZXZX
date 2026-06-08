@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日報入力ツール 操作マニュアル</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Shippori+Mincho+B1:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4efe4;--paper:#fffdf8;--ink:#211c16;--muted:#7c715f;--line:#e3dccb;
+--accent:#c0843c;--accent-deep:#9a5e1f;--good:#3f7d5a;--behind:#b85c4a;
+--shadow:0 1px 2px rgba(33,28,22,.04),0 8px 24px rgba(33,28,22,.05);
+--serif:"Shippori Mincho B1",serif;--num:"Fraunces",serif;
+--sans:"Zen Kaku Gothic New",-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.75;-webkit-font-smoothing:antialiased;
+background-image:radial-gradient(rgba(33,28,22,.025) 1px,transparent 1px);background-size:22px 22px;}
+.wrap{max-width:820px;margin:0 auto;padding:44px 26px 90px}
+header{border-top:4px solid var(--ink);padding-top:20px;margin-bottom:8px}
+.eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--accent-deep);font-weight:700;margin-bottom:7px}
+h1{font-family:var(--serif);font-weight:700;font-size:30px;line-height:1.25}
+h1 small{display:block;font-size:14px;color:var(--muted);font-weight:500;margin-top:5px}
+.meta{font-size:11.5px;color:var(--muted);margin-top:10px}
+.toc{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:24px 0 34px;box-shadow:var(--shadow)}
+.toc h2{font-family:var(--serif);font-size:13px;margin-bottom:8px;letter-spacing:.04em}
+.toc ol{list-style:none;counter-reset:t;display:grid;grid-template-columns:1fr 1fr;gap:4px 18px}
+.toc li{counter-increment:t;font-size:12.5px;color:#403a30;padding-left:24px;position:relative}
+.toc li::before{content:counter(t);position:absolute;left:0;font-family:var(--num);font-weight:600;color:var(--accent-deep);background:rgba(192,132,60,.12);width:18px;height:18px;border-radius:50%;text-align:center;font-size:11px;line-height:18px}
+section{margin-bottom:40px}
+h2.sec{font-family:var(--serif);font-size:19px;font-weight:700;display:flex;align-items:center;gap:11px;margin-bottom:6px;padding-bottom:9px;border-bottom:1px solid var(--line)}
+h2.sec .no{font-family:var(--num);font-size:14px;font-weight:600;color:#fff;background:var(--ink);width:26px;height:26px;border-radius:50%;text-align:center;line-height:26px;flex:none}
+p{font-size:13.5px;color:#3b352b;margin:10px 0}
+.lead{font-size:13.5px;color:#3b352b}
+ul.feat{list-style:none;margin:10px 0}
+ul.feat li{font-size:13px;color:#3b352b;padding-left:20px;position:relative;margin:6px 0;line-height:1.65}
+ul.feat li::before{content:"▸";position:absolute;left:0;color:var(--accent);top:1px}
+ul.feat li b{color:var(--ink)}
+ol.steps{margin:10px 0 10px 4px;padding-left:0;list-style:none;counter-reset:s}
+ol.steps li{counter-increment:s;font-size:13px;color:#3b352b;padding-left:30px;position:relative;margin:7px 0;line-height:1.65}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;font-family:var(--num);font-weight:600;color:var(--accent-deep);background:rgba(192,132,60,.12);width:20px;height:20px;border-radius:50%;text-align:center;font-size:11px;line-height:20px}
+
+/* figure */
+figure{margin:16px 0 8px;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);background:#efe9dc}
+.figcap{font-size:11px;color:var(--muted);background:#efe9dc;padding:7px 13px;border-bottom:1px solid var(--line);font-weight:700;letter-spacing:.04em}
+.figbody{padding:16px;background:var(--bg)}
+.callouts{list-style:none;margin:10px 0 0;padding:13px 15px;background:#fff;border:1px solid var(--line);border-radius:10px}
+.callouts li{font-size:12.5px;color:#3b352b;padding-left:28px;position:relative;margin:6px 0;line-height:1.6}
+.callouts li .cn{position:absolute;left:0;top:1px;font-family:var(--num);font-weight:700;color:#fff;background:var(--accent);width:19px;height:19px;border-radius:50%;text-align:center;font-size:11px;line-height:19px}
+.cn-inline{display:inline-flex;font-family:var(--num);font-weight:700;color:#fff;background:var(--accent);width:17px;height:17px;border-radius:50%;align-items:center;justify-content:center;font-size:10px;vertical-align:middle;margin:0 2px}
+
+.note{background:rgba(192,132,60,.09);border:1px dashed rgba(192,132,60,.45);border-radius:10px;padding:12px 15px;margin:14px 0;font-size:12.5px;color:#403a30}
+.note b{color:var(--accent-deep)}
+.warn{background:rgba(184,92,74,.08);border:1px solid rgba(184,92,74,.3);border-left:3px solid var(--behind);border-radius:10px;padding:12px 15px;margin:14px 0;font-size:12.5px;color:#403a30}
+.warn b{color:var(--behind)}
+
+/* --- app-like UI parts for figures --- */
+button{font-family:var(--sans);border:none;border-radius:7px;font-weight:700}
+.u-toolbar{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:12px 15px}
+.u-field{display:flex;flex-direction:column;gap:3px}
+.u-field label{font-size:10px;color:var(--muted);font-weight:700}
+.u-field .box{font-size:12.5px;border:1px solid var(--line);border-radius:7px;padding:6px 9px;background:#fffefb;font-family:var(--num)}
+.u-btn{background:var(--ink);color:#fdf6e8;font-size:12px;padding:8px 13px;margin-left:auto}
+.u-line{background:transparent;border:1px solid var(--accent);color:var(--accent-deep);font-size:11.5px;padding:5px 11px}
+.u-x{background:transparent;color:var(--behind);font-size:11px;padding:5px 9px;border:1px solid transparent}
+.u-div{background:var(--paper);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+.u-div-sum{display:flex;align-items:center;gap:10px;padding:13px 15px;flex-wrap:wrap}
+.u-chev{color:var(--accent-deep);font-size:11px}
+.u-nm-div{font-family:var(--serif);font-weight:700;font-size:16px}
+.u-div-body{padding:6px 15px 15px;border-top:1px solid var(--line)}
+.u-pj{border:1px solid var(--line);border-radius:11px;background:#fffefb;margin-top:10px;overflow:hidden}
+.u-pj-sum{display:flex;align-items:center;gap:9px;padding:11px 13px;flex-wrap:wrap}
+.u-nm-pj{font-weight:700;font-size:14px}
+.u-status{display:inline-flex;border:1px solid var(--line);border-radius:7px;overflow:hidden}
+.u-st{font-size:10px;padding:4px 9px;background:transparent;color:var(--muted);font-weight:700}
+.u-st.on-act{background:var(--good);color:#fff}.u-st.on-stp{background:#8a8073;color:#fff}
+.u-badge{font-size:9.5px;font-weight:700;color:#fff;background:#8a8073;border-radius:100px;padding:2px 8px}
+.sp{margin-left:auto}
+.u-blk{font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--accent-deep);margin:13px 0 7px;display:flex;align-items:center;gap:7px}
+.u-blk::before{content:"";width:12px;height:2px;background:var(--accent)}
+.u-tgt{display:inline-flex;flex-direction:column;gap:2px;margin-right:9px}
+.u-tgt label{font-size:9.5px;color:var(--muted);font-weight:700}
+.u-tgt .box{width:58px;text-align:center;font-family:var(--num);font-size:13px;border:1px solid var(--line);border-radius:6px;padding:5px;background:#fffefb}
+table.u-daily{border-collapse:collapse;width:100%;font-size:12px}
+table.u-daily th{font-size:9.5px;color:var(--muted);font-weight:700;padding:5px 6px;border-bottom:1px solid var(--line);text-align:center}
+table.u-daily th:first-child{text-align:left}
+table.u-daily td{padding:4px 6px;border-bottom:1px solid #efe9da;text-align:center}
+.u-cell{font-family:var(--num);font-size:13px;border:1px solid var(--line);border-radius:6px;padding:4px 6px;background:#fffefb;display:inline-block;min-width:44px}
+.u-cell.date{font-size:12px;min-width:96px}
+.u-note-btn{background:transparent;border:1px solid var(--accent);color:var(--accent-deep);font-size:11px;padding:3px 7px;border-radius:6px}
+.chart{background:#fffefb;border:1px solid var(--line);border-radius:9px;padding:10px 12px 6px}
+.div-chart{border-left:3px solid var(--accent-deep)}
+.clegend{display:flex;gap:13px;flex-wrap:wrap;font-size:10.5px;color:var(--muted);margin-top:6px}
+.clegend span{display:inline-flex;align-items:center;gap:5px}.clegend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+.wk-card{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:9px;padding:10px 13px;background:#fffefb}
+.wk-card .wh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px;gap:6px}
+.wk-card .wt{font-family:var(--serif);font-weight:700;font-size:13px}.wk-card .wr{font-size:10.5px;color:var(--muted)}
+.wgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:8px}
+.wcell{background:#faf6ec;border:1px solid var(--line);border-radius:8px;padding:7px 8px}
+.wcell .l{font-size:9.5px;color:var(--muted);font-weight:700}
+.wcell .v{font-family:var(--num);font-size:16px;font-weight:600;margin:2px 0 1px}
+.wcell .v .o{font-size:10px;color:var(--muted);font-weight:400}
+.wcell .p{font-family:var(--num);font-size:10px;font-weight:600}
+.wbar{height:4px;background:#eee6d6;border-radius:4px;overflow:hidden;margin-top:5px}.wbar>i{display:block;height:100%;border-radius:4px}
+.wconv{font-size:10.5px;color:var(--muted);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.wconv b{font-family:var(--num);color:var(--ink);font-weight:600}.wconv .arr{color:var(--accent)}
+footer{margin-top:50px;border-top:1px solid var(--line);padding-top:16px;font-size:11px;color:var(--muted)}
+@media(max-width:600px){.toc ol{grid-template-columns:1fr}.wgrid{grid-template-columns:repeat(2,1fr)}}
+</style></head><body><div class="wrap">
+
+<header>
+<div class="eyebrow">Operation Manual</div>
+<h1>日報入力ツール<small>操作マニュアル / 機能説明書（プロトタイプ版）</small></h1>
+<div class="meta">対象：エンキャリ採用オペレーション ／ 図はすべてデモデータによる再現イメージです。</div>
+</header>
+
+<div class="toc"><h2>目次</h2><ol>
+<li>このツールでできること</li>
+<li>画面の全体構成</li>
+<li>事業部・PJの管理</li>
+<li>運用中／停止中の切り替え</li>
+<li>目標と日次データの入力</li>
+<li>グラフの見方</li>
+<li>週次サマリーと集計期間</li>
+<li>注意事項と今後の対応</li>
+</ol></div>
+
+<section>
+<h2 class="sec"><span class="no">1</span>このツールでできること</h2>
+<p class="lead">事業部 → プロジェクト（PJ）の2階層で、日々の採用ファネル指標（ADアポ・AD参加・面談アポ・面談参加）と施策メモを入力・可視化するツールです。入力に応じてグラフと週次サマリーが自動で更新されます。</p>
+<ul class="feat">
+<li><b>事業部・PJを自由に追加／削除／名称変更</b>（数に制限なし）</li>
+<li><b>PJごとに「運用中／停止中」を切り替え</b>。停止中は集計から自動で除外</li>
+<li><b>1日あたりの目標設定</b>と<b>日次入力</b>（4指標＋実施事項・ネクストアクション）</li>
+<li><b>PJ別／事業部別の推移グラフ</b>を自動表示</li>
+<li><b>週次サマリー</b>（達成率・ファネル転換率）を自動算出。集計期間も指定可能</li>
+</ul>
+</section>
+
+<section>
+<h2 class="sec"><span class="no">2</span>画面の全体構成</h2>
+<p>最上部に全体設定のツールバー、その下に事業部のブロックが縦に並びます。事業部ブロックを開くと、中に事業部サマリーグラフと各PJが入っています。</p>
+<figure><div class="figcap">図1：画面上部（再現イメージ）</div><div class="figbody">
+<div class="u-toolbar">
+<div class="u-field"><label>集計の開始日 <span class="cn-inline">1</span></label><span class="box">2026-06-01</span></div>
+<div class="u-field"><label>1週間の日数 <span class="cn-inline">2</span></label><span class="box">7</span></div>
+<button class="u-btn">＋ 事業部を追加 <span class="cn-inline" style="background:#fff;color:var(--ink)">3</span></button>
+</div>
+<div style="height:10px"></div>
+<div class="u-div"><div class="u-div-sum"><span class="u-chev">▼</span><span class="u-nm-div">IS事業部 <span class="cn-inline">4</span></span><span class="sp"></span><button class="u-line">＋ PJ追加 <span class="cn-inline">5</span></button><button class="u-x">事業部削除</button></div></div>
+</div></figure>
+<ul class="callouts">
+<li><span class="cn">1</span><b>集計の開始日</b>：週の区切りの起点。</li>
+<li><span class="cn">2</span><b>1週間の日数</b>：何日を1週間として集計するか（7以外も可、後から変更できます）。</li>
+<li><span class="cn">3</span><b>＋ 事業部を追加</b>：新しい事業部ブロックを追加します。</li>
+<li><span class="cn">4</span><b>事業部名</b>：クリックでその場で編集できます。</li>
+<li><span class="cn">5</span><b>＋ PJ追加 / 事業部削除</b>：その事業部にPJを足す・事業部ごと消す。</li>
+</ul>
+</section>
+
+<section>
+<h2 class="sec"><span class="no">3</span>事業部・PJの管理</h2>
+<ol class="steps">
+<li>「＋ 事業部を追加」で事業部ブロックを作成。名前をクリックして変更します。</li>
+<li>事業部内の「＋ PJ追加」でプロジェクトを追加。PJ名も同様に編集できます。</li>
+<li>不要になったら「事業部削除」「PJ削除」で削除（確認ダイアログが出ます）。</li>
+</ol>
+<div class="note">📌 事業部・PJは<b>いくつ増やしても動作します</b>。追加すると、その分のグラフ・サマリーも自動で増えます。</div>
+</section>
+
+<section>
+<h2 class="sec"><span class="no">4</span>運用中／停止中の切り替え</h2>
+<p>各PJの見出しに切替ボタンがあります。停止したPJは「停止中」表示になり、見た目が薄くなります。</p>
+<figure><div class="figcap">図2：PJ見出しと運用状態（再現イメージ）</div><div class="figbody">
+<div class="u-pj"><div class="u-pj-sum"><span class="u-chev">▼</span><span class="u-nm-pj">Star Creation Next</span><span class="sp"></span>
+<span class="u-status"><span class="u-st on-act">運用中</span><span class="u-st">停止中</span></span> <span class="cn-inline">1</span>
+<button class="u-x">PJ削除</button></div></div>
+<div style="height:8px"></div>
+<div class="u-pj" style="opacity:.66"><div class="u-pj-sum"><span class="u-chev">▶</span><span class="u-nm-pj" style="text-decoration:line-through;text-decoration-color:#bcb2a0">旧キャンペーンPJ</span> <span class="u-badge">停止中</span> <span class="cn-inline">2</span><span class="sp"></span>
+<span class="u-status"><span class="u-st">運用中</span><span class="u-st on-stp">停止中</span></span><button class="u-x">PJ削除</button></div></div>
+</div></figure>
+<ul class="callouts">
+<li><span class="cn">1</span><b>運用中／停止中トグル</b>：クリックで切り替え。</li>
+<li><span class="cn">2</span><b>停止中PJ</b>：薄く表示＋バッジ付き。<b>事業部サマリーの合算からは除外</b>されます（PJ自身のデータ・グラフは残ります）。</li>
+</ul>
+</section>
+
+<section>
+<h2 class="sec"><span class="no">5</span>目標と日次データの入力</h2>
+<p>PJを開くと、上から「目標設定」「日次入力」が並びます。目標は1日あたりの値を一度設定すれば、週次サマリーが日数分を自動で掛けて算出します。</p>
+<figure><div class="figcap">図3：目標設定と日次入力（再現イメージ）</div><div class="figbody">
+<div class="u-blk">目標設定（1日あたり）</div>
+<div><span class="u-tgt"><label>ADアポ数</label><span class="box">5</span></span><span class="u-tgt"><label>AD参加数</label><span class="box">4</span></span><span class="u-tgt"><label>面談アポ数</label><span class="box">3</span></span><span class="u-tgt"><label>面談参加数</label><span class="box">2</span></span></div>
+<div class="u-blk">日次入力</div>
+<table class="u-daily"><thead><tr><th>日付</th><th>ADアポ</th><th>AD参加</th><th>面談アポ</th><th>面談参加</th><th></th></tr></thead>
+<tbody>
+<tr><td><span class="u-cell date">2026-06-04</span></td><td><span class="u-cell">2</span></td><td><span class="u-cell">1</span></td><td><span class="u-cell">1</span></td><td><span class="u-cell">1</span></td><td><button class="u-note-btn">📝 施策 <span class="cn-inline">2</span></button></td></tr>
+<tr><td><span class="u-cell date">2026-06-05</span> <span class="cn-inline">1</span></td><td><span class="u-cell">2</span></td><td><span class="u-cell">0</span></td><td><span class="u-cell">0</span></td><td><span class="u-cell">0</span></td><td><button class="u-note-btn">📝 施策</button></td></tr>
+</tbody></table>
+</div></figure>
+<ul class="callouts">
+<li><span class="cn">1</span><b>日次入力行</b>：日付と4指標の実数を入力。「＋ 日次を追加」で行が増え、日付は自動で翌日が入ります。</li>
+<li><span class="cn">2</span><b>📝 施策</b>：押すと「実施事項」「ネクストアクション（NA）」のメモ欄が開きます。</li>
+</ul>
+</section>
+
+<section>
+<h2 class="sec"><span class="no">6</span>グラフの見方</h2>
+<p>入力すると、PJごとに「推移グラフ（日次）」が自動で描かれます。事業部の先頭には、<b>運用中PJを日付ごとに合算した事業部サマリーグラフ</b>が表示されます。実線が各指標の日次実数、横軸が日付です。</p>
+<figure><div class="figcap">図4：推移グラフ（再現イメージ・デモデータ）</div><div class="figbody">
+<div class="chart div-chart"><svg viewBox="0 0 560 180" width="100%"><line x1="30" y1="156.0" x2="546" y2="156.0" stroke="#e3dccb" stroke-width="1"/><text x="24" y="160.0" text-anchor="end" font-size="9" fill="#9a8f7c" font-family="Fraunces,serif">0</text><line x1="30" y1="99.2" x2="546" y2="99.2" stroke="#e3dccb" stroke-width="1"/><text x="24" y="103.2" text-anchor="end" font-size="9" fill="#9a8f7c" font-family="Fraunces,serif">2</text><line x1="30" y1="14.0" x2="546" y2="14.0" stroke="#e3dccb" stroke-width="1"/><text x="24" y="18.0" text-anchor="end" font-size="9" fill="#9a8f7c" font-family="Fraunces,serif">5</text><path d="M30.0 70.8 L159.0 42.4 L288.0 99.2 L417.0 99.2 L546.0 99.2 " fill="none" stroke="#c0843c" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="30.0" cy="70.8" r="2.4" fill="#fffefb" stroke="#c0843c" stroke-width="1.6"/><circle cx="159.0" cy="42.4" r="2.4" fill="#fffefb" stroke="#c0843c" stroke-width="1.6"/><circle cx="288.0" cy="99.2" r="2.4" fill="#fffefb" stroke="#c0843c" stroke-width="1.6"/><circle cx="417.0" cy="99.2" r="2.4" fill="#fffefb" stroke="#c0843c" stroke-width="1.6"/><circle cx="546.0" cy="99.2" r="2.4" fill="#fffefb" stroke="#c0843c" stroke-width="1.6"/><path d="M30.0 127.6 L159.0 99.2 L288.0 127.6 L417.0 127.6 L546.0 156.0 " fill="none" stroke="#9a5e1f" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="30.0" cy="127.6" r="2.4" fill="#fffefb" stroke="#9a5e1f" stroke-width="1.6"/><circle cx="159.0" cy="99.2" r="2.4" fill="#fffefb" stroke="#9a5e1f" stroke-width="1.6"/><circle cx="288.0" cy="127.6" r="2.4" fill="#fffefb" stroke="#9a5e1f" stroke-width="1.6"/><circle cx="417.0" cy="127.6" r="2.4" fill="#fffefb" stroke="#9a5e1f" stroke-width="1.6"/><circle cx="546.0" cy="156.0" r="2.4" fill="#fffefb" stroke="#9a5e1f" stroke-width="1.6"/><path d="M30.0 127.6 L159.0 127.6 L288.0 99.2 L417.0 127.6 L546.0 156.0 " fill="none" stroke="#3f7d5a" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="30.0" cy="127.6" r="2.4" fill="#fffefb" stroke="#3f7d5a" stroke-width="1.6"/><circle cx="159.0" cy="127.6" r="2.4" fill="#fffefb" stroke="#3f7d5a" stroke-width="1.6"/><circle cx="288.0" cy="99.2" r="2.4" fill="#fffefb" stroke="#3f7d5a" stroke-width="1.6"/><circle cx="417.0" cy="127.6" r="2.4" fill="#fffefb" stroke="#3f7d5a" stroke-width="1.6"/><circle cx="546.0" cy="156.0" r="2.4" fill="#fffefb" stroke="#3f7d5a" stroke-width="1.6"/><path d="M30.0 156.0 L159.0 127.6 L288.0 156.0 L417.0 127.6 L546.0 156.0 " fill="none" stroke="#b85c4a" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="30.0" cy="156.0" r="2.4" fill="#fffefb" stroke="#b85c4a" stroke-width="1.6"/><circle cx="159.0" cy="127.6" r="2.4" fill="#fffefb" stroke="#b85c4a" stroke-width="1.6"/><circle cx="288.0" cy="156.0" r="2.4" fill="#fffefb" stroke="#b85c4a" stroke-width="1.6"/><circle cx="417.0" cy="127.6" r="2.4" fill="#fffefb" stroke="#b85c4a" stroke-width="1.6"/><circle cx="546.0" cy="156.0" r="2.4" fill="#fffefb" stroke="#b85c4a" stroke-width="1.6"/><text x="30.0" y="171" text-anchor="middle" font-size="9" fill="#9a8f7c" font-family="Fraunces,serif">6/1</text><text x="159.0" y="171" text-anchor="middle" font-size="9" fill="#9a8f7c" font-family="Fraunces,serif">6/2</text><text x="288.0" y="171" text-anchor="middle" font-size="9" fill="#9a8f7c" font-family="Fraunces,serif">6/3</text><text x="417.0" y="171" text-anchor="middle" font-size="9" fill="#9a8f7c" font-family="Fraunces,serif">6/4</text><text x="546.0" y="171" text-anchor="middle" font-size="9" fill="#9a8f7c" font-family="Fraunces,serif">6/5</text></svg><div class="clegend"><span><i style="background:#c0843c"></i>ADアポ数</span><span><i style="background:#9a5e1f"></i>AD参加数</span><span><i style="background:#3f7d5a"></i>面談アポ数</span><span><i style="background:#b85c4a"></i>面談参加数</span></div></div>
+</div></figure>
+<div class="note">📈 日付が多いときは横軸ラベルを間引いて表示するため、長期間でも見やすさを保てます。事業部・PJを増やせば、その数だけグラフも自動で追加されます。</div>
+</section>
+
+<section>
+<h2 class="sec"><span class="no">7</span>週次サマリーと集計期間</h2>
+<p>各PJの下部に、期間ごとの達成率とファネル転換率がカードで出ます。上部ツールバーの「1週間の日数」を変えると、区切り方が即座に変わります（例：5日や10日でまとめることも可能）。</p>
+<figure><div class="figcap">図5：週次サマリー（再現イメージ・6/1〜6/5の5日分）</div><div class="figbody">
+<div class="wk-card"><div class="wh"><span class="wt">第1週</span><span class="wr">6/1(月) 〜 6/5(金) ・ 5日分</span></div>
+<div class="wgrid"><div class="wcell"><div class="l">ADアポ数</div><div class="v">13<span class="o"> / 25</span></div><div class="p" style="color:var(--behind)">52%</div><div class="wbar"><i style="width:52%;background:var(--behind)"></i></div></div><div class="wcell"><div class="l">AD参加数</div><div class="v">5<span class="o"> / 20</span></div><div class="p" style="color:var(--behind)">25%</div><div class="wbar"><i style="width:25%;background:var(--behind)"></i></div></div><div class="wcell"><div class="l">面談アポ数</div><div class="v">5<span class="o"> / 15</span></div><div class="p" style="color:var(--behind)">33%</div><div class="wbar"><i style="width:33%;background:var(--behind)"></i></div></div><div class="wcell"><div class="l">面談参加数</div><div class="v">2<span class="o"> / 10</span></div><div class="p" style="color:var(--behind)">20%</div><div class="wbar"><i style="width:20%;background:var(--behind)"></i></div></div></div>
+<div class="wconv"><span>転換率</span><b>13</b><span class="arr">→</span><b>5</b>(38%)<span class="arr">→</span><b>5</b>(100%)<span class="arr">→</span><b>2</b>(40%)</div></div>
+</div></figure>
+<ul class="callouts">
+<li><span class="cn">1</span><b>達成率</b>：各指標の「期間合計 ÷（1日目標×日数）」。70%未満は赤、100%以上は緑で色分け。</li>
+<li><span class="cn">2</span><b>転換率</b>：ADアポ→参加→面談アポ→面談参加の歩留まりを表示します。</li>
+</ul>
+</section>
+
+<section>
+<h2 class="sec"><span class="no">8</span>注意事項と今後の対応</h2>
+<div class="warn">⚠ <b>現バージョンはプロトタイプ</b>です。入力データはブラウザのメモリ上のみで保持され、<b>ページを再読み込みすると消えます</b>。また、会社アドレス限定のアクセス制限はまだ掛かっていません。</div>
+<p>次の段階で、このツールを <b>Google Apps Script のウェブアプリ</b>として公開し、以下を実装します。</p>
+<ul class="feat">
+<li><b>データの保存・共有</b>：入力内容をスプレッドシートに保存し、チーム全員で同じデータを参照。</li>
+<li><b>アクセス制限</b>：公開範囲を「組織内のみ」に設定し、<b>会社のGoogleアカウントを持つ人だけ</b>が閲覧・編集できるようにする。</li>
+<li><b>自動CSV出力</b>などのデータ保守機能。</li>
+</ul>
+</section>
+
+<footer>日報入力ツール 操作マニュアル（プロトタイプ版） ／ 図はデモデータによる再現イメージです。</footer>
+</div></body></html>
